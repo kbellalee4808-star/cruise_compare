@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>크루즈 선사별 포함 내역 비교 | Bella</title>
+<meta name="description" content="버진·NCL·코스타·MSC — 같은 크루즈여도 요금에 뭐가 포함되는지 완전히 달라요. 선사별 포함 내역을 한눈에 정리했어요.">
+<meta property="og:title" content="크루즈 선사별 포함 내역 비교 | Bella">
+<meta property="og:description" content="같은 배를 타도 포함 내역이 달라요. 버진·NCL·코스타·MSC 비교 정리.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700;900&display=swap" rel="stylesheet">
+<style>
+:root{
+  --navy:#1B3A5C; --gold:#D4A94A; --ivory:#FAF7F2;
+  --navy-soft:#2C4E72; --ink:#2A2A2A; --line:#E8E0D4;
+  --ok:#5B8C6E; --no:#C0705C; --maybe:#C9922E;
+}
+*{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent;}
+html{scroll-behavior:smooth;}
+body{font-family:'Noto Sans KR',sans-serif;background:var(--ivory);color:var(--ink);
+  line-height:1.6;word-break:keep-all;}
+.wrap{max-width:520px;margin:0 auto;min-height:100dvh;overflow-x:hidden;}
+
+/* Hero */
+.hero{background:linear-gradient(160deg,var(--navy) 0%,var(--navy-soft) 100%);
+  color:#fff;padding:60px 26px 48px;text-align:center;}
+.hero-eyebrow{font-size:11.5px;letter-spacing:3px;color:var(--gold);font-weight:700;
+  text-transform:uppercase;margin-bottom:14px;}
+.hero h1{font-size:27px;font-weight:900;line-height:1.4;margin-bottom:16px;}
+.hero h1 em{font-style:normal;color:var(--gold);}
+.hero p{font-size:14.5px;color:#DCE6F0;line-height:1.75;}
+.hero-note{margin-top:20px;font-size:12.5px;color:#B8C8DA;
+  background:rgba(255,255,255,.08);border-radius:12px;padding:12px 14px;line-height:1.6;}
+
+/* Section */
+.section{padding:44px 20px;}
+.sec-eyebrow{font-size:11px;letter-spacing:2.5px;color:var(--gold);font-weight:700;
+  text-transform:uppercase;margin-bottom:9px;text-align:center;}
+.sec-title{font-size:22px;font-weight:900;color:var(--navy);text-align:center;
+  line-height:1.4;margin-bottom:8px;}
+.sec-sub{font-size:13.5px;color:var(--navy-soft);text-align:center;
+  margin-bottom:26px;line-height:1.7;}
+
+/* 범례 */
+.legend{display:flex;gap:14px;justify-content:center;flex-wrap:wrap;margin-bottom:20px;}
+.leg{display:flex;align-items:center;gap:5px;font-size:12px;color:var(--navy-soft);font-weight:500;}
+.dot{width:9px;height:9px;border-radius:50%;display:inline-block;}
+.d-ok{background:var(--ok);} .d-no{background:var(--no);} .d-maybe{background:var(--maybe);}
+
+/* 선사 카드 */
+.line-card{background:#fff;border:1px solid var(--line);border-radius:18px;
+  margin-bottom:14px;overflow:hidden;}
+.line-head{padding:18px 18px 14px;border-bottom:1px solid var(--line);}
+.line-name{font-size:18px;font-weight:900;color:var(--navy);margin-bottom:4px;}
+.line-tag{font-size:12px;color:var(--gold);font-weight:700;letter-spacing:.5px;}
+.line-desc{font-size:12.5px;color:var(--navy-soft);margin-top:7px;line-height:1.6;}
+.line-body{padding:14px 18px 18px;}
+.row{display:flex;align-items:flex-start;gap:9px;padding:7px 0;font-size:13.5px;
+  border-bottom:1px dashed #F0EAE0;}
+.row:last-child{border-bottom:none;}
+.row .mk{flex:0 0 auto;width:16px;text-align:center;font-weight:900;font-size:13px;line-height:1.5;}
+.mk-ok{color:var(--ok);} .mk-no{color:var(--no);} .mk-maybe{color:var(--maybe);}
+.row .txt{flex:1;line-height:1.55;}
+.row .txt b{color:var(--navy);font-weight:700;}
+.row .txt span{color:var(--navy-soft);font-size:12.5px;}
+
+/* 요약 박스 */
+.summary{background:var(--navy);border-radius:18px;padding:24px 20px;color:#fff;}
+.summary h3{font-size:16px;font-weight:700;margin-bottom:14px;text-align:center;color:#fff;}
+.sum-item{background:rgba(255,255,255,.08);border-radius:12px;padding:13px 15px;
+  margin-bottom:9px;font-size:13.5px;line-height:1.6;}
+.sum-item:last-child{margin-bottom:0;}
+.sum-item b{color:var(--gold);}
+
+/* 팁 */
+.tip{background:linear-gradient(135deg,#F0E4CA 0%,#fff 100%);
+  border:1.5px solid var(--gold);border-radius:18px;padding:24px 20px;}
+.tip h3{font-size:17px;font-weight:900;color:var(--navy);margin-bottom:12px;text-align:center;}
+.tip p{font-size:13.5px;line-height:1.75;color:var(--ink);}
+.tip p + p{margin-top:11px;}
+
+/* CTA */
+.cta{background:linear-gradient(160deg,var(--navy) 0%,var(--navy-soft) 100%);
+  color:#fff;padding:48px 26px;text-align:center;}
+.cta-quote{font-size:14.5px;font-style:italic;color:var(--gold);line-height:1.7;margin-bottom:20px;}
+.cta-div{width:38px;height:2px;background:var(--gold);margin:0 auto 20px;}
+.cta-eyebrow{font-size:11px;letter-spacing:2.5px;color:var(--gold);font-weight:700;
+  text-transform:uppercase;margin-bottom:11px;}
+.cta h2{font-size:22px;font-weight:900;margin-bottom:13px;line-height:1.4;}
+.cta p{font-size:13.5px;color:#DCE6F0;line-height:1.75;margin-bottom:24px;}
+.cta-btn{display:inline-block;background:var(--gold);color:var(--navy);
+  font-size:15.5px;font-weight:700;padding:16px 36px;border-radius:30px;
+  text-decoration:none;min-height:52px;line-height:1.4;
+  box-shadow:0 6px 20px rgba(212,169,74,.35);}
+.cta-btn:active{transform:scale(.97);}
+.cta-sub{font-size:12px;color:#B8C8DA;margin-top:14px;line-height:1.6;}
+
+.footer{text-align:center;padding:26px;color:var(--navy-soft);font-size:11.5px;
+  line-height:1.7;}
+.footer .fname{font-weight:900;color:var(--navy);letter-spacing:1px;font-size:13px;}
+
+@media(max-width:360px){.hero h1{font-size:24px;} .sec-title{font-size:20px;}}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header class="hero">
+    <div class="hero-eyebrow">Cruise Line Comparison</div>
+    <h1>같은 크루즈인데<br><em>포함 내역</em>이<br>다 달라요</h1>
+    <p>버진 · NCL · 코스타 · MSC<br>뭐가 포함이고 뭐가 따로인지 정리했어요.</p>
+    <div class="hero-note">💡 이걸 모르고 타면 배 안에서 계속 결제하게 돼요.<br>예약 전에 이 기준으로 비교해보세요.</div>
+  </header>
+
+  <section class="section">
+    <div class="sec-eyebrow">At a glance</div>
+    <h2 class="sec-title">선사별 포함 내역</h2>
+    <p class="sec-sub">기본 요금에 들어있는 것 위주로 정리했어요</p>
+
+    <div class="legend">
+      <span class="leg"><i class="dot d-ok"></i>포함</span>
+      <span class="leg"><i class="dot d-maybe"></i>조건부·선택</span>
+      <span class="leg"><i class="dot d-no"></i>별도</span>
+    </div>
+
+    <!-- Virgin -->
+    <div class="line-card">
+      <div class="line-head">
+        <div class="line-tag">ADULTS ONLY</div>
+        <div class="line-name">Virgin Voyages</div>
+        <div class="line-desc">18세 이상 성인 전용. 포함이 가장 넉넉한 편이에요.</div>
+      </div>
+      <div class="line-body">
+        <div class="row"><span class="mk mk-ok">●</span><span class="txt"><b>정찬 레스토랑 6곳</b> <span>특선 추가요금 없이 전부 무료</span></span></div>
+        <div class="row"><span class="mk mk-ok">●</span><span class="txt"><b>캐주얼 식당·푸드홀</b> <span>합쳐서 20여 곳, 뷔페는 없어요</span></span></div>
+        <div class="row"><span class="mk mk-ok">●</span><span class="txt"><b>기본 음료</b> <span>생수·탄산·커피</span></span></div>
+        <div class="row"><span class="mk mk-ok">●</span><span class="txt"><b>와이파이</b> <span>기본 제공</span></span></div>
+        <div class="row"><span class="mk mk-ok">●</span><span class="txt"><b>팁(서비스료)</b> <span>요금에 포함</span></span></div>
+        <div class="row"><span class="mk mk-ok">●</span><span class="txt"><b>피트니스 클래스</b> <span>대부분 무료</span></span></div>
+        <div class="row"><span class="mk mk-no">●</span><span class="txt"><b>주류</b> <span>별도</span></span></div>
+        <div class="row"><span class="mk mk-no">●</span><span class="txt"><b>일부 프리미엄 메뉴</b> <span>캐비어·씨푸드타워 등은 추가</span></span></div>
+        <div class="row"><span class="mk mk-no">●</span><span class="txt"><b>기항지 투어</b> <span>별도</span></span></div>
+      </div>
+    </div>
+
+    <!-- NCL -->
+    <div class="line-card">
+      <div class="line-head">
+        <div class="line-tag">FREE AT SEA</div>
+        <div class="line-name">NCL (노르웨이지안)</div>
+        <div class="line-desc">패키지를 붙이느냐에 따라 완전히 달라져요.</div>
+      </div>
+      <div class="line-body">
+        <div class="row"><span class="mk mk-ok">●</span><span class="txt"><b>뷔페·기본 레스토랑</b> <span>포함</span></span></div>
+        <div class="row"><span class="mk mk-maybe">●</span><span class="txt"><b>주류 무제한</b> <span>Free at Sea 선택 시</span></span></div>
+        <div class="row"><span class="mk mk-maybe">●</span><span class="txt"><b>특선 레스토랑</b> <span>Free at Sea 선택 시</span></span></div>
+        <div class="row"><span class="mk mk-maybe">●</span><span class="txt"><b>와이파이</b> <span>Free at Sea 선택 시</span></span></div>
+        <div class="row"><span class="mk mk-maybe">●</span><span class="txt"><b>기항지 투어 크레딧</b> <span>Free at Sea 선택 시</span></span></div>
+        <div class="row"><span class="mk mk-no">●</span><span class="txt"><b>팁(서비스료)</b> <span>별도 · 패키지 이용 시 추가 부과</span></span></div>
+      </div>
+    </div>
+
+    <!-- Costa -->
+    <div class="line-card">
+      <div class="line-head">
+        <div class="line-tag">ITALIAN STYLE</div>
+        <div class="line-name">Costa (코스타)</div>
+        <div class="line-desc">이탈리아 선사. 한국 출발편이 있어서 입문용으로 많이 타요.</div>
+      </div>
+      <div class="line-body">
+        <div class="row"><span class="mk mk-ok">●</span><span class="txt"><b>정찬·뷔페</b> <span>요금에 포함</span></span></div>
+        <div class="row"><span class="mk mk-ok">●</span><span class="txt"><b>선내 시설·공연</b> <span>대부분 포함</span></span></div>
+        <div class="row"><span class="mk mk-no">●</span><span class="txt"><b>선상 팁</b> <span>별도 · 1박당 약 $16~19 일괄 청구</span></span></div>
+        <div class="row"><span class="mk mk-no">●</span><span class="txt"><b>음료·주류</b> <span>별도 · 패키지 구매 가능</span></span></div>
+        <div class="row"><span class="mk mk-no">●</span><span class="txt"><b>와이파이</b> <span>별도</span></span></div>
+        <div class="row"><span class="mk mk-no">●</span><span class="txt"><b>유료 레스토랑·기항지 투어</b> <span>별도</span></span></div>
+      </div>
+    </div>
+
+    <!-- MSC -->
+    <div class="line-card">
+      <div class="line-head">
+        <div class="line-tag">EXPERIENCE 등급</div>
+        <div class="line-name">MSC</div>
+        <div class="line-desc">같은 배여도 등급(Bella·Fantastica·Aurea 등)에 따라 혜택이 달라요.</div>
+      </div>
+      <div class="line-body">
+        <div class="row"><span class="mk mk-ok">●</span><span class="txt"><b>정찬·뷔페</b> <span>요금에 포함</span></span></div>
+        <div class="row"><span class="mk mk-ok">●</span><span class="txt"><b>선내 시설·공연</b> <span>대부분 포함</span></span></div>
+        <div class="row"><span class="mk mk-maybe">●</span><span class="txt"><b>객실 선택·식사 시간</b> <span>등급에 따라 자유도 차이</span></span></div>
+        <div class="row"><span class="mk mk-maybe">●</span><span class="txt"><b>음료 패키지</b> <span>상위 등급은 포함되기도</span></span></div>
+        <div class="row"><span class="mk mk-no">●</span><span class="txt"><b>서비스료(팁)</b> <span>별도</span></span></div>
+        <div class="row"><span class="mk mk-no">●</span><span class="txt"><b>와이파이·기항지 투어</b> <span>별도</span></span></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" style="padding-top:0;">
+    <div class="summary">
+      <h3>세 줄 요약</h3>
+      <div class="sum-item"><b>가장 신경 안 쓰고 타고 싶다면</b><br>버진 — 팁·와이파이·정찬이 대부분 포함이에요.</div>
+      <div class="sum-item"><b>술을 즐긴다면</b><br>NCL — 패키지 붙이면 무제한이라 계산이 편해요.</div>
+      <div class="sum-item"><b>처음이라 가볍게 시작한다면</b><br>코스타·MSC — 기본 요금이 낮은 대신 팁·음료가 따로예요.</div>
+    </div>
+  </section>
+
+  <section class="section" style="padding-top:0;">
+    <div class="tip">
+      <h3>제가 실제로 겪은 것</h3>
+      <p>산토리니에 갔을 때, 어떤 배는 <b>케이블카랑 다운타운 셔틀까지 포함</b>이었어요. 같은 섬을 가는데도 어떤 배는 전부 따로 내야 하고요.</p>
+      <p>와이파이도 그래요. 7박에 20만원쯤 나가는 배가 있는가 하면, 기본 포함인 배도 있어요.</p>
+      <p>그래서 <b>"얼마짜리 배냐"보다 "뭐가 포함이냐"</b>를 먼저 보게 됐어요. 이 차이를 알고 나서는 같은 예산으로 훨씬 자주 다니게 됐고요.</p>
+    </div>
+  </section>
+
+
+  <footer class="footer">
+    <div class="fname">BELLA · CRUISE NOMAD</div>
+    <p style="margin-top:7px;">크루즈로 세계일주 중 · 21번째 항해</p>
+    <p style="margin-top:10px;color:#9AA8B5;">선사 정책과 프로모션은 시즌·예약 시점에 따라<br>수시로 바뀌어요. 예약 전 최신 조건을 꼭 확인하세요.</p>
+  </footer>
+
+</div>
+</body>
+</html>
